@@ -54,10 +54,14 @@
     self.pinView.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:self.pinView];
     // center pin view
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.pinView attribute:NSLayoutAttributeCenterX
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.pinView attribute:NSLayoutAttributeLeft
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view attribute:NSLayoutAttributeCenterX
-                                                         multiplier:1.0f constant:0.0f]];
+                                                             toItem:self.view attribute:NSLayoutAttributeLeft
+                                                         multiplier:1.0f constant:10.0f]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.pinView attribute:NSLayoutAttributeRight
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view attribute:NSLayoutAttributeRight
+                                                         multiplier:1.0f constant:-10.0f]];
     CGFloat pinViewYOffset = 0.0f;
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         pinViewYOffset = -9.0f;
@@ -69,10 +73,23 @@
             pinViewYOffset = 18.5f;
         }
     }
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.pinView attribute:NSLayoutAttributeCenterY
+
+    CGFloat yInset = 28;
+    if (self.navigationController.navigationBar) {
+        yInset += self.navigationController.navigationBar.frame.size.height;
+    }
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.pinView attribute:NSLayoutAttributeTop
                                                           relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view attribute:NSLayoutAttributeCenterY
-                                                         multiplier:1.0f constant:pinViewYOffset]];
+                                                             toItem:self.view attribute:NSLayoutAttributeTop
+                                                         multiplier:1.0f constant:yInset]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.pinView attribute:NSLayoutAttributeBottom
+                                                          relatedBy:NSLayoutRelationEqual
+                                                             toItem:self.view attribute:NSLayoutAttributeBottom
+                                                         multiplier:1.0f constant:0]];
+
+    if ([self.delegate respondsToSelector:@selector(titleStringForPinViewController:)]) {
+        self.navigationItem.title = [self.delegate titleStringForPinViewController:self];
+    }
 }
 
 #pragma mark - Properties
@@ -122,6 +139,14 @@
     }
     _promptColor = promptColor;
     self.pinView.promptColor = self.promptColor;
+}
+
+- (void)setPromptFont:(UIFont *)promptFont {
+    if ([self.promptFont isEqual:promptFont]) {
+        return;
+    }
+    _promptFont = promptFont;
+    [self.pinView setPromptFont:promptFont];
 }
 
 - (void)setHideLetters:(BOOL)hideLetters
@@ -234,6 +259,14 @@
                 [self.delegate pinViewControllerDidDismissAfterPinEntryWasUnsuccessful:self];
             }
         }];
+    }
+}
+
+- (NSString *)messageStringForPinView:(THPinView *)pinView {
+    if ([self.delegate respondsToSelector:@selector(messageStringForPinViewController:)]) {
+        return [self.delegate messageStringForPinViewController:self];
+    } else {
+        return nil;
     }
 }
 

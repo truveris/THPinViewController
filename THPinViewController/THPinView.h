@@ -19,6 +19,7 @@
 - (void)cancelButtonTappedInPinView:(THPinView *)pinView;
 - (void)correctPinWasEnteredInPinView:(THPinView *)pinView;
 - (void)incorrectPinWasEnteredInPinView:(THPinView *)pinView;
+- (NSString *)messageStringForPinView:(THPinView *)pinView;
 
 @end
 
@@ -31,5 +32,7 @@
 @property (nonatomic, assign) BOOL disableCancel;
 
 - (instancetype)initWithDelegate:(id<THPinViewDelegate>)delegate NS_DESIGNATED_INITIALIZER;
+
+-(void)setPromptFont:(UIFont *)font;
 
 @end
