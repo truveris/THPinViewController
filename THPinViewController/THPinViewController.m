@@ -230,6 +230,8 @@
             [self.delegate pinViewControllerDidDismissAfterPinEntryWasCancelled:self];
         }
     }];
+    [self.delegate dismissPinViewController];
+
 }
 
 - (void)correctPinWasEnteredInPinView:(THPinView *)pinView
@@ -242,6 +244,7 @@
             [self.delegate pinViewControllerDidDismissAfterPinEntryWasSuccessful:self];
         }
     }];
+    [self.delegate dismissPinViewController];
 }
 
 - (void)incorrectPinWasEnteredInPinView:(THPinView *)pinView
@@ -259,6 +262,7 @@
                 [self.delegate pinViewControllerDidDismissAfterPinEntryWasUnsuccessful:self];
             }
         }];
+        [self.delegate dismissPinViewController];
     }
 }
 

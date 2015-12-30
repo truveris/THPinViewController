@@ -22,6 +22,9 @@ static const NSInteger THPinViewControllerContentViewTag = 14742;
 - (BOOL)pinViewController:(THPinViewController *)pinViewController isPinValid:(NSString *)pin;
 - (BOOL)userCanRetryInPinViewController:(THPinViewController *)pinViewController;
 
+//Anything extra to do to dismiss the VC (in case normal dismissViewController isn't enough)
+- (void)dismissPinViewController;
+
 @optional
 - (void)incorrectPinEnteredInPinViewController:(THPinViewController *)pinViewController;
 - (void)pinViewControllerWillDismissAfterPinEntryWasSuccessful:(THPinViewController *)pinViewController;
