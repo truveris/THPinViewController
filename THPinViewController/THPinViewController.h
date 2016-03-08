@@ -29,7 +29,7 @@ static const NSInteger THPinViewControllerContentViewTag = 14742;
 - (void)incorrectPinEnteredInPinViewController:(THPinViewController *)pinViewController;
 - (void)pinViewControllerWillDismissAfterPinEntryWasSuccessful:(THPinViewController *)pinViewController;
 - (void)pinViewControllerDidDismissAfterPinEntryWasSuccessful:(THPinViewController *)pinViewController;
-- (void)pinViewControllerWillDismissAfterPinEntryWasUnsuccessful:(THPinViewController *)pinViewController;
+- (void)pinViewControllerWillDismissAfterPinEntryWasUnsuccessful:(UIViewController *)pinViewController;
 - (void)pinViewControllerDidDismissAfterPinEntryWasUnsuccessful:(THPinViewController *)pinViewController;
 - (void)pinViewControllerWillDismissAfterPinEntryWasCancelled:(THPinViewController *)pinViewController;
 - (void)pinViewControllerDidDismissAfterPinEntryWasCancelled:(THPinViewController *)pinViewController;

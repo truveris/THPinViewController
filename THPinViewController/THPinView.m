@@ -31,7 +31,7 @@
 @implementation THPinView
 
 - (instancetype)initWithDelegate:(id<THPinViewDelegate>)delegate {
-    self = [super init];
+    self = [super initWithFrame:CGRectZero];
     if (self)
     {
         _delegate = delegate;
